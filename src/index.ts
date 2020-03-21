@@ -1,37 +1,42 @@
-import *  as express from 'express';
-import *  as mongoose from 'mongoose';
-import { getEnviromentVariables } from './enviroment/env';
+import { Server } from "./server";
 
-let app: express.Application = express();
 
-app.listen(5000,()=>{
- console.log("started");
+let server =new Server().app;
+let port = 5000;
+server.listen(port,()=>{
+console.log('server is run');
 });
 
-app.use(function(req,res,next){
-    console.log('middelware');
-    next();
-});
 
-app.get('/login',(req:any,res,next)=>{
-    const data = [{name:'testusername'}]; 
-    req.user = data;
-    res.send(data);
-    next();
-},(req:any,res)=>  {
-    console.log('another middelware');
-    console.log(req.user);
-}
-);
+// import *  as express from 'express';
+// import *  as mongoose from 'mongoose';
+// import { getEnviromentVariables } from './enviroment/env';
 
-console.log(getEnviromentVariables().db_url);
+// let app: express.Application = express();
 
-mongoose.connect(getEnviromentVariables().db_url,
-{useNewUrlParser:true,useUnifiedTopology:true})
-.then(()=>{
-    console.log('mongo db is connected');
-});
+// app.listen(5000,()=>{
+//  console.log("started");
+// });
 
-app.get('/result',(req,res)=>{
-    res.send('this is result rersonse');
-})
+// app.use(function(req,res,next){
+//     console.log('middelware');
+//     next();
+// });
+
+// app.get('/login',(req:any,res,next)=>{
+//     const data = [{name:'testusername'}]; 
+//     req.user = data;
+//     res.send(data);
+//     next();
+// },(req:any,res)=>  {
+//     console.log('another middelware');
+//     console.log(req.user);
+// }
+// );
+
+// console.log(getEnviromentVariables().db_url);
+
+
+// app.get('/result',(req,res)=>{
+//     res.send('this is result rersonse');
+// })
